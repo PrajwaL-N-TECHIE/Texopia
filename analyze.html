@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Analysis Results | TextUtils</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .result-box {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .stats-badge {
+            font-size: 0.9rem;
+        }
+        .action-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .action-list li::before {
+            content: "✓ ";
+            color: #28a745;
+        }
+    </style>
+</head>    
+<body>
+    <div class="container py-4">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3">
+                <i class="fas fa-chart-bar text-primary me-2"></i>Analysis Results
+            </h1>
+            <a href="/" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Editor
+            </a>
+        </div>
+
+        <!-- Operations Performed -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-tasks me-2"></i>Operations Applied
+            </div>
+            <div class="card-body">
+                <ul class="action-list mb-0">
+                    {% for action in purpose_list %}
+                        <li>{{ action }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Text Results -->
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <i class="fas fa-file-alt me-2"></i>Analyzed Text
+            </div>
+            <div class="card-body p-0">
+                <div class="result-box p-3">
+                    {{ analyzed_text }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <i class="fas fa-chart-pie me-2"></i>Text Statistics
+            </div>
+            <div class="card-body">
+                <div class="d-flex gap-3">
+                    <span class="badge bg-primary stats-badge">
+                        <i class="fas fa-font me-1"></i> {{ char_count }} characters
+                    </span>
+                    <span class="badge bg-success stats-badge">
+                        <i class="fas fa-align-left me-1"></i> {{ word_count }} words
+                    </span>
+                    <span class="badge bg-warning text-dark stats-badge">
+                        <i class="fas fa-paragraph me-1"></i> {{ analyzed_text|linebreaksbr|length }} lines
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-between mt-4">
+            <button onclick="copyToClipboard()" class="btn btn-outline-secondary">
+                <i class="fas fa-copy me-2"></i>Copy Text
+            </button>
+            <a href="/" class="btn btn-primary">
+                <i class="fas fa-redo me-2"></i>Analyze More Text
+            </a>
+            <button onclick="downloadText()" class="btn btn-outline-success">
+                <i class="fas fa-download me-2"></i>Download
+            </button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function copyToClipboard() {
+            const text = `{{ analyzed_text|escapejs }}`;
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    alert('Text copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+
+        function downloadText() {
+            const text = `{{ analyzed_text|escapejs }}`;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            const now = new Date();
+            const timestamp = now.toISOString().replace(/[:.]/g, '-');
+            a.href = url;
+            a.download = `analyzed_text_${timestamp}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

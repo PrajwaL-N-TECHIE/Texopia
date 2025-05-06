@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Texopia - Advanced Text Processing Tool</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7ff;
+            color: #333;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #4361ee 0%, #3f37c9 100%);
+            color: white;
+            padding: 4rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 3rem;
+        }
+        
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .text-area-box {
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: none;
+            padding: 1.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        /* Dark mode styles */
+        .dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .navbar, 
+        .dark-mode .footer {
+            background-color: #1a1a2e !important;
+        }
+        
+        .dark-mode .card,
+        .dark-mode .form-control {
+            background-color: #2d2d42 !important;
+            color: #e0e0e0 !important;
+            border-color: #3d3d5a !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-text-width me-2"></i>Texopia
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about-section">About</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <button id="darkModeToggle" class="btn btn-sm btn-outline-dark">
+                            <i class="fas fa-moon"></i> Dark Mode
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Transform Your Text Effortlessly</h1>
+            <p class="lead mb-5">Powerful text processing tools at your fingertips. Analyze, modify and enhance any text with ease.</p>
+            <a href="#text-processing" class="btn btn-light btn-lg px-4">
+                <i class="fas fa-play me-2"></i>Try It Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container mb-5">
+        <div class="row text-center mb-4">
+            <div class="col">
+                <h2 class="fw-bold">Why Choose Texopia?</h2>
+                <p class="text-muted">The ultimate toolkit for all your text processing needs</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card feature-card p-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h4>Smart Processing</h4>
+                    <p>Advanced algorithms to analyze and transform your text with precision and accuracy.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card feature-card p-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4>Lightning Fast</h4>
+                    <p>Process large amounts of text instantly with our optimized processing engine.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card feature-card p-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h4>Privacy Focused</h4>
+                    <p>All processing happens in your browser. Your data never leaves your device.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Text Processing Section -->
+    <section id="text-processing" class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <form action="/analyze" method="post">
+                            {% csrf_token %}
+                            
+                            <div class="mb-4">
+                                <label class="form-label fw-bold mb-3">
+                                    <i class="fas fa-pencil-alt me-2"></i>Enter Your Text Below
+                                </label>
+                                <textarea class="form-control text-area-box" id="textInput" name="text" rows="8" 
+                                    placeholder="Type or paste your text here..."></textarea>
+                                <div class="d-flex justify-content-between mt-2 text-muted small">
+                                    <span id="charCount">0 characters</span>
+                                    <span id="wordCount">0 words</span>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <h5 class="fw-bold mb-3"><i class="fas fa-tools me-2"></i>Text Operations</h5>
+                                    <div class="form-check form-switch mb-3">
+                                        <input type="checkbox" name="removepunc" class="form-check-input" id="removePunc">
+                                        <label class="form-check-label" for="removePunc">Remove Punctuations</label>
+                                    </div>
+                                    <div class="form-check form-switch mb-3">
+                                        <input type="checkbox" name="fullcaps" class="form-check-input" id="fullCaps">
+                                        <label class="form-check-label" for="fullCaps">Convert to UPPERCASE</label>
+                                    </div>
+                                    <div class="form-check form-switch mb-3">
+                                        <input type="checkbox" name="newlineremove" class="form-check-input" id="newLineRemove">
+                                        <label class="form-check-label" for="newLineRemove">Remove New Lines</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="fw-bold mb-3"><i class="fas fa-sliders-h me-2"></i>Advanced Options</h5>
+                                    <div class="form-check form-switch mb-3">
+                                        <input type="checkbox" name="spaceremove" class="form-check-input" id="spaceRemove">
+                                        <label class="form-check-label" for="spaceRemove">Remove Extra Spaces</label>
+                                    </div>
+                                    <div class="form-check form-switch mb-3">
+                                        <input type="checkbox" name="reverseText" class="form-check-input" id="reverseText">
+                                        <label class="form-check-label" for="reverseText">Reverse Text</label>
+                                    </div>
+                                    <div class="form-check form-switch mb-3">
+                                        <input type="checkbox" name="removeDuplicates" class="form-check-input" id="removeDuplicates">
+                                        <label class="form-check-label" for="removeDuplicates">Remove Duplicate Lines</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-play me-2"></i>Analyze Text
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about-section" class="container mb-5 py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="fw-bold mb-4 text-center">About Texopia</h2>
+                <p class="lead mb-4 text-center">TextUtils is a powerful text processing application designed to help you manipulate and analyze text with ease.</p>
+                <p class="text-center">Developed by <strong>Prajwal</strong>, this application provides a comprehensive set of tools for all your text processing needs. Whether you're a writer, developer, or student, TextUtils can help you save time and work more efficiently.</p>
+                <p class="text-center">The application was built using modern web technologies including Django for backend processing and Bootstrap 5 for the responsive interface. All processing happens in real-time, giving you instant results.</p>
+                <div class="mt-4">
+                    <h5 class="fw-bold mb-3 text-center">Key Features:</h5>
+                    <ul class="list-unstyled text-center">
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Multiple text processing operations</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Clean, intuitive interface</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Real-time character and word counting</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Dark mode for comfortable night use</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Completely free to use</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mb-4 mb-md-0">
+                    <h4 class="mb-3"><i class="fas fa-text-width me-2"></i>Texopia</h4>
+                    <p>The ultimate text processing tool for professionals and students alike.</p>
+                    <p>Developed with ❤️ by Prajwal</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/" class="text-white">Home</a></li>
+                        <li class="mb-2"><a href="#about-section" class="text-white">About</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col text-center">
+                    <p class="mb-0 small">&copy; 2025 Texopia. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+                darkModeToggle.classList.replace('btn-outline-dark', 'btn-outline-light');
+            } else {
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+                darkModeToggle.classList.replace('btn-outline-light', 'btn-outline-dark');
+            }
+        });
+
+        // Character & Word Counter
+        const textInput = document.getElementById('textInput');
+        const charCount = document.getElementById('charCount');
+        const wordCount = document.getElementById('wordCount');
+
+        textInput.addEventListener('input', () => {
+            const text = textInput.value;
+            charCount.textContent = `${text.length} characters`;
+            wordCount.textContent = `${text.trim() === '' ? 0 : text.trim().split(/\s+/).length} words`;
+        });
+    </script>
+</body>
+</html>
